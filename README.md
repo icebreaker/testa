@@ -17,7 +17,7 @@ Contribute
 
 License
 -------
-Copyright (c) 2017, Mihail Szabolcs
+Copyright (c) 2017 - 2018, Mihail Szabolcs
 
 Testa is provided **as-is** under the **MIT** license.
 For more information see LICENSE.

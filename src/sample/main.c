@@ -61,14 +61,14 @@ int sample_swap_numbers(void)
 }
 
 TESTA_SUITE_BEGIN
-	TESTA_GROUP_BEGIN("sample test group");
-		TESTA_TEST(sample_magic_numbers);
-		TESTA_TEST(sample_more_magic_numbers);
-		TESTA_TEST(sample_that_will_be_skipped);
-		TESTA_TEST(sample_is_not_null);
-		TESTA_GROUP_BEGIN("sample sub test group");
-			TESTA_TEST(sample_pointer_equality);
-			TESTA_TEST(sample_swap_numbers);
+	TESTA_GROUP_BEGIN("sample test group")
+		TESTA_TEST(sample_magic_numbers)
+		TESTA_TEST(sample_more_magic_numbers)
+		TESTA_TEST(sample_that_will_be_skipped)
+		TESTA_TEST(sample_is_not_null)
+		TESTA_GROUP_BEGIN("sample sub test group")
+			TESTA_TEST(sample_pointer_equality)
+			TESTA_TEST(sample_swap_numbers)
 		TESTA_GROUP_END
 	TESTA_GROUP_END
 TESTA_SUITE_END

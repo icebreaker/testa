@@ -1,6 +1,6 @@
 /* {{{ */
 /*
-	Copyright (c) 2017, Mihail Szabolcs
+	Copyright (c) 2017 - 2018, Mihail Szabolcs
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the 'Software'), to deal
@@ -25,7 +25,7 @@
 #define TESTA_H
 
 #ifndef TESTA_VERSION
-	#define TESTA_VERSION 0x100
+	#define TESTA_VERSION 0x101
 #endif
 
 #if defined(_MSC_VER) || defined(TESTA_COLORLESS)
@@ -174,7 +174,7 @@
 #define TESTA_GROUP_BEGIN(s) \
 	{ \
 		TESTA_PRINT_GROUP(s); \
-		indent += TESTA_INDENT
+		indent += TESTA_INDENT;
 
 #define TESTA_GROUP_END \
 		indent -= TESTA_INDENT; \
@@ -206,7 +206,7 @@
 			} \
 			break; \
 		} \
-	} while(0)
+	} while(0);
 
 #endif
 
