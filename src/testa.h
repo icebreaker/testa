@@ -24,11 +24,20 @@
 #ifndef TESTA_H
 #define TESTA_H
 
-#ifndef TESTA_VERSION
-	#define TESTA_VERSION 0x101
+#ifdef TESTA_REPORT_ASSERTS
+	static unsigned int __testa_asserts = 0;
+	#define TESTA_REPORT_ASSERTS_UNUSED() (void)(__testa_asserts)
+	#define TESTA_REPORT_ASSERTS_INC() __testa_asserts++
+#else
+	#define TESTA_REPORT_ASSERTS_UNUSED()
+	#define TESTA_REPORT_ASSERTS_INC()
 #endif
 
-#if defined(_MSC_VER) || defined(TESTA_COLORLESS)
+#ifndef TESTA_VERSION
+	#define TESTA_VERSION 0x102
+#endif
+
+#if defined(_WIN32) || defined(TESTA_COLORLESS)
 	#define TESTA_COLOR_RED		""
 	#define TESTA_COLOR_CYAN	""
 	#define TESTA_COLOR_YELLOW	""
@@ -99,10 +108,17 @@
 #endif
 
 #ifndef TESTA_PRINT_REPORT
-	#define TESTA_PRINT_REPORT(argc, argv, count, success, failure, skips, elapsed) \
-			TESTA_PRINTF(TESTA_COLOR_WHITE "\n%u tests, %u passed, %u failures, %u skips, " \
-						 TESTA_TIME_FORMAT " seconds\n" TESTA_COLOR_END, \
-						 count, success, failure, skips, elapsed)
+	#ifdef TESTA_REPORT_ASSERTS
+		#define TESTA_PRINT_REPORT(argc, argv, count, success, failure, skips, elapsed) \
+				TESTA_PRINTF(TESTA_COLOR_WHITE "\n%u tests, %u passed, %u failures, %u skips, " \
+							 "%u asserts, " TESTA_TIME_FORMAT " seconds\n" TESTA_COLOR_END, \
+							 count, success, failure, skips, __testa_asserts, elapsed)
+	#else
+		#define TESTA_PRINT_REPORT(argc, argv, count, success, failure, skips, elapsed) \
+				TESTA_PRINTF(TESTA_COLOR_WHITE "\n%u tests, %u passed, %u failures, %u skips, " \
+							 TESTA_TIME_FORMAT " seconds\n" TESTA_COLOR_END, \
+							 count, success, failure, skips, elapsed)
+	#endif
 #endif
 
 #ifndef TESTA_PRINT_ASSERT
@@ -138,6 +154,7 @@
 #define TESTA_ASSERT(x) \
 	do \
 	{ \
+		TESTA_REPORT_ASSERTS_INC(); \
 		if(!(x)) \
 		{ \
 			TESTA_PRINT_ASSERT(x); \
@@ -153,6 +170,7 @@
 	{ \
 		unsigned int count = 0, success = 0, failure = 0, skips = 0, indent = 0; \
 		TESTA_TIME_TYPE started; \
+		TESTA_REPORT_ASSERTS_UNUSED(); \
 		TESTA_UNUSED(argc); \
 		TESTA_UNUSED(argv); \
 		TESTA_UNUSED(count); \
