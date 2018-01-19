@@ -34,7 +34,7 @@
 #endif
 
 #ifndef TESTA_VERSION
-	#define TESTA_VERSION 0x102
+	#define TESTA_VERSION 0x103
 #endif
 
 #if defined(_WIN32) || defined(TESTA_COLORLESS)
