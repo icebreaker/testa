@@ -184,7 +184,6 @@
 		TESTA_UNUSED(failure); \
 		TESTA_UNUSED(skips); \
 		TESTA_UNUSED(indent); \
-		TESTA_UNUSED(started); \
 		TESTA_PRINT_WELCOME(argc, argv); \
 		started = TESTA_TIME(); \
 		{
